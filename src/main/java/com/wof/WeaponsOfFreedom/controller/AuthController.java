@@ -10,6 +10,8 @@ import com.wof.WeaponsOfFreedom.dto.SignUpDTO;
 import com.wof.WeaponsOfFreedom.model.UserModel;
 import com.wof.WeaponsOfFreedom.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -23,7 +25,8 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody SignUpDTO req) {
+    public ResponseEntity<?> signup(@Valid @RequestBody SignUpDTO req) { // @Valid for handleValidation
+                                                                         // error handling
         try {
             UserModel created = userService.userSignUp(req);
             return ResponseEntity.ok(created);
